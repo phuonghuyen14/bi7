@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thao tác với mảng (Prompt)</title>
+</head>
+<body>
+    <h1>Thao tác với mảng</h1>
+    <p id="ketQua7"></p>
+
+    <script>
+        function thaoTacMang() {
+            const mangNhapChuoi = prompt("Vui lòng nhập mảng (các phần tử cách nhau bởi dấu phẩy):");
+            const phanTuTim = prompt("Vui lòng nhập phần tử bạn muốn tìm:");
+            const ketQuaElement = document.getElementById("ketQua7");
+
+            if (mangNhapChuoi === null || phanTuTim === null) {
+                ketQuaElement.textContent = "Bạn đã hủy nhập một hoặc cả hai giá trị.";
+                return;
+            }
+
+            const mang = mangNhapChuoi.split(',').map(item => item.trim());
+            const mangSo = mang.map(item => parseInt(item));
+
+            let output = "Mảng đã nhập: " + mang.join(', ') + "<br>";
+
+            const mangDaoNguoc = [...mang].reverse();
+            output += "Mảng đảo ngược: " + mangDaoNguoc.join(', ') + "<br>";
+
+            const mangSapXep = [...mangSo].sort((a, b) => a - b);
+            output += "Mảng sắp xếp tăng dần: " + mangSapXep.join(', ') + "<br>";
+
+            let tongChan = 0;
+            for (const num of mangSo) {
+                if (!isNaN(num) && num % 2 === 0) {
+                    tongChan += num;
+                }
+            }
+            output += "Tổng các phần tử chẵn: " + tongChan + "<br>";
+
+            const viTri = mang.indexOf(phanTuTim);
+            if (viTri !== -1) {
+                output += `Phần tử "${phanTuTim}" có trong mảng tại vị trí ${viTri}.`;
+            } else {
+                output += `Phần tử "${phanTuTim}" không có trong mảng.`;
+            }
+
+            ketQuaElement.innerHTML = output;
+        }
+
+     
+        thaoTacMang();
+    </script>
+</body>
+</html>
